@@ -1,4 +1,4 @@
-name: Deploy to FTP
+name: CI/CD Mantap
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader
       #
@@ -41,8 +41,9 @@ jobs:
           password: "${{ secrets.FTP_PASSWORD }}"
           # Protocol bisa disesuaikan, default 'ftp'. Pakai 'ftps' jika server mendukung.
           protocol: ftp
+          port: 21
           # Opsional: Jika Anda ingin upload masuk spesifik ke sub-folder di hosting:
-          # server-dir: /public_html/
+          server-dir: ./
 
           # Opsional: Mengabaikan file/folder tertentu saat deploy (misal: node_modules, log, file env lokal)
           exclude: |
