@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return array(
     'manage_skill' => 'Manage Skills',
     'manage_server_configuration' => 'Manage Server Configuration',
     'add_job' => 'Add Job',
@@ -489,4 +489,31 @@ return array (
     'edit_payouts' => 'Edit Payouts',
     'delete_payouts' => 'Delete Payouts',
     'manage_payout_status' => 'Manage Payout Status',
+
+    // Export Permissions
+    'export_clients' => 'Export Clients',
+    'export_employees' => 'Export Employees',
+    'export_projects' => 'Export Projects',
+    'export_attendance' => 'Export Attendance',
+    'export_tasks' => 'Export Tasks',
+    'export_estimates' => 'Export Estimates',
+    'export_invoices' => 'Export Invoices',
+    'export_payments' => 'Export Payments',
+    'export_timelogs' => 'Export Timelogs',
+    'export_tickets' => 'Export Tickets',
+    'export_events' => 'Export Events',
+    'export_notices' => 'Export Notices',
+    'export_leaves' => 'Export Leaves',
+    'export_leads' => 'Export Leads',
+    'export_holidays' => 'Export Holidays',
+    'export_products' => 'Export Products',
+    'export_expenses' => 'Export Expenses',
+    'export_contracts' => 'Export Contracts',
+    'export_reports' => 'Export Reports',
+    'export_settings' => 'Export Settings',
+    'export_dashboards' => 'Export Dashboards',
+    'export_orders' => 'Export Orders',
+    'export_knowledgebase' => 'Export Knowledgebase',
+    'export_bankaccount' => 'Export Bank Accounts',
+    'export_messages' => 'Export Messages',
 );

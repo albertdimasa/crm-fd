@@ -1,0 +1,53 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - main # Jalankan otomatis jika ada push ke branch 'main' (sesuaikan jika Anda pakai branch 'master')
+
+jobs:
+  web-deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Mengambil kode terbaru dari repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # (Opsional) Step 2: Menginstal dependensi Composer atau NPM jika diperlukan
+      # Jika Anda mem-build aset di lokal dan men-commit foldernya (contoh: public/build atau vendor),
+      # Anda bisa melewati step ini. Namun praktik terbaik adalah men-generate-nya di pipeline.
+      #
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+      #
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      # - name: Build Frontend Assets
+      #   run: npm ci && npm run build
+
+      # Step 3: Melakukan upload via FTP
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4 # Action populer untuk sinkronisasi FTP
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Protocol bisa disesuaikan, default 'ftp'. Pakai 'ftps' jika server mendukung.
+          protocol: ftp
+          # Opsional: Jika Anda ingin upload masuk spesifik ke sub-folder di hosting:
+          # server-dir: /public_html/
+
+          # Opsional: Mengabaikan file/folder tertentu saat deploy (misal: node_modules, log, file env lokal)
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .env.example
+            readme.md
